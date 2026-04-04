@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enzoptimize — Formations SEO, Réseaux Sociaux & IA</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,700;0,900;1,300;1,700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --noir: #0D0D0D;
+  --blanc: #FAFAF8;
+  --creme: #F2EFE9;
+  --accent: #C8773A;
+  --accent-light: #F5E6D8;
+  --gris: #6B6B6B;
+  --gris-clair: #E8E5DF;
+  --vert: #2D6A4F;
+  --bleu: #1D4ED8;
+  --violet: #6D28D9;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--blanc);
+  color: var(--noir);
+  overflow-x: hidden;
+}
+
+/* ── ANIMATIONS ─────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+@keyframes grain {
+  0%,100%{transform:translate(0,0)}
+  10%{transform:translate(-2%,-3%)}
+  30%{transform:translate(3%,-1%)}
+  50%{transform:translate(-1%,2%)}
+  70%{transform:translate(2%,1%)}
+  90%{transform:translate(-3%,2%)}
+}
+
+.fade-up { opacity: 0; animation: fadeUp .7s ease forwards; }
+.delay-1 { animation-delay: .1s; }
+.delay-2 { animation-delay: .22s; }
+.delay-3 { animation-delay: .34s; }
+.delay-4 { animation-delay: .46s; }
+
+/* ── NAV ─────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.1rem 2.5rem;
+  background: rgba(250,250,248,.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--gris-clair);
+}
+.nav-logo {
+  font-family: 'Fraunces', serif;
+  font-size: 1.3rem; font-weight: 700;
+  color: var(--noir);
+}
+.nav-logo span { color: var(--accent); }
+.nav-cta {
+  background: var(--noir); color: var(--blanc);
+  padding: .5rem 1.3rem; border-radius: 6px;
+  font-size: .85rem; font-weight: 600;
+  text-decoration: none;
+  transition: background .2s, transform .15s;
+}
+.nav-cta:hover { background: var(--accent); transform: translateY(-1px); }
+
+/* ── HERO ─────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 7rem 2.5rem 4rem;
+  position: relative;
+  overflow: hidden;
+  background: var(--noir);
+}
+
+/* grain texture */
+.hero::before {
+  content: '';
+  position: absolute; inset: -50%;
+  width: 200%; height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+  opacity: .35;
+  animation: grain 6s steps(1) infinite;
+  pointer-events: none;
+}
+
+/* warm glow */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -20%; right: -10%;
+  width: 60vw; height: 60vw;
+  background: radial-gradient(circle, rgba(200,119,58,.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative; z-index: 1;
+  max-width: 780px; margin: 0 auto;
+  text-align: center;
+}
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: .5rem;
+  border: 1px solid rgba(200,119,58,.4);
+  background: rgba(200,119,58,.1);
+  color: #E8A068;
+  padding: .35em 1em; border-radius: 99px;
+  font-size: .78rem; font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; margin-bottom: 1.8rem;
+}
+
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2.6rem, 7vw, 5.5rem);
+  font-weight: 900; line-height: 1.05;
+  color: var(--blanc);
+  margin-bottom: 1.2rem;
+}
+.hero h1 em {
+  font-style: italic; font-weight: 300;
+  color: var(--accent);
+}
+
+.hero-sub {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: rgba(250,250,248,.65);
+  line-height: 1.7; max-width: 52ch;
+  margin: 0 auto 2.5rem;
+}
+
+.hero-ctas {
+  display: flex; gap: 1rem; justify-content: center;
+  flex-wrap: wrap; margin-bottom: 3rem;
+}
+.btn-primary {
+  background: var(--accent); color: var(--blanc);
+  padding: .85rem 2rem; border-radius: 8px;
+  font-weight: 700; font-size: 1rem;
+  text-decoration: none; transition: all .2s;
+  box-shadow: 0 4px 20px rgba(200,119,58,.4);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(200,119,58,.5); }
+.btn-ghost {
+  border: 1px solid rgba(250,250,248,.25); color: rgba(250,250,248,.8);
+  padding: .85rem 2rem; border-radius: 8px;
+  font-weight: 500; font-size: 1rem;
+  text-decoration: none; transition: all .2s;
+}
+.btn-ghost:hover { border-color: rgba(250,250,248,.5); color: var(--blanc); }
+
+.hero-stats {
+  display: flex; gap: 2.5rem; justify-content: center;
+  flex-wrap: wrap;
+}
+.hero-stat .num {
+  font-family: 'Fraunces', serif;
+  font-size: 2rem; font-weight: 700; color: var(--blanc);
+  line-height: 1;
+}
+.hero-stat .lbl {
+  font-size: .78rem; color: rgba(250,250,248,.5);
+  margin-top: .2rem;
+}
+
+/* scroll indicator */
+.scroll-hint {
+  position: absolute; bottom: 2rem; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: .4rem;
+  color: rgba(250,250,248,.3); font-size: .72rem; letter-spacing: .1em;
+  animation: float 2.5s ease-in-out infinite;
+}
+.scroll-hint::after {
+  content: '';
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, rgba(250,250,248,.3), transparent);
+}
+
+/* ── SECTION SHARED ──────────────────────────── */
+section { padding: 5rem 2.5rem; }
+.section-tag {
+  font-size: .72rem; font-weight: 700; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: .6rem;
+}
+.section-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 700; line-height: 1.15;
+  color: var(--noir); margin-bottom: .6rem;
+}
+.section-sub {
+  color: var(--gris); font-size: 1rem;
+  line-height: 1.7; max-width: 52ch;
+}
+.center { text-align: center; }
+.center .section-sub { margin: 0 auto; }
+
+/* ── PROBLÈME ──────────────────────────────── */
+.probleme { background: var(--creme); }
+.probleme-grid {
+  max-width: 900px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem; margin-top: 2.5rem;
+}
+.prob-card {
+  background: var(--blanc);
+  border: 1px solid var(--gris-clair);
+  border-radius: 12px; padding: 1.4rem;
+}
+.prob-card .icon { font-size: 1.6rem; margin-bottom: .6rem; }
+.prob-card h3 { font-size: .95rem; font-weight: 600; color: var(--noir); margin-bottom: .3rem; }
+.prob-card p { font-size: .85rem; color: var(--gris); line-height: 1.6; }
+
+/* ── ABOUT ──────────────────────────────────── */
+.about { background: var(--blanc); }
+.about-inner {
+  max-width: 860px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+  align-items: center;
+}
+@media(max-width:640px){ .about-inner { grid-template-columns: 1fr; gap: 2rem; } }
+.about-avatar {
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, var(--accent-light) 0%, var(--creme) 100%);
+  border-radius: 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 5rem;
+  border: 1px solid var(--gris-clair);
+  position: relative; overflow: hidden;
+}
+.about-avatar::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 40%; background: linear-gradient(to top, rgba(200,119,58,.1), transparent);
+}
+.about-text .section-title { font-size: clamp(1.4rem, 3vw, 2rem); }
+.about-text p { color: var(--gris); line-height: 1.75; font-size: .95rem; margin-bottom: .9rem; }
+.about-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1rem; }
+.about-tag {
+  background: var(--creme); border: 1px solid var(--gris-clair);
+  border-radius: 6px; padding: .25em .7em;
+  font-size: .78rem; color: var(--gris); font-weight: 500;
+}
+
+/* ── FORMATIONS ─────────────────────────────── */
+.formations { background: var(--creme); }
+.formations-grid {
+  max-width: 1000px; margin: 3rem auto 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.2rem;
+}
+.formation-card {
+  background: var(--blanc);
+  border: 1px solid var(--gris-clair);
+  border-radius: 16px; overflow: hidden;
+  transition: transform .25s, box-shadow .25s;
+  display: flex; flex-direction: column;
+}
+.formation-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,.1);
+}
+.card-top {
+  padding: 1.6rem 1.6rem 1rem;
+  border-bottom: 1px solid var(--gris-clair);
+}
+.card-emoji { font-size: 2rem; margin-bottom: .7rem; }
+.card-badge {
+  display: inline-block;
+  font-size: .7rem; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; padding: .2em .7em; border-radius: 4px;
+  margin-bottom: .6rem;
+}
+.badge-vert  { background: #D1FAE5; color: #065F46; }
+.badge-bleu  { background: #DBEAFE; color: #1E3A5F; }
+.badge-violet{ background: #EDE9FE; color: #4C1D95; }
+.badge-noir  { background: var(--noir); color: var(--blanc); }
+.card-top h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.25rem; font-weight: 700;
+  color: var(--noir); margin-bottom: .3rem;
+}
+.card-top p { font-size: .85rem; color: var(--gris); line-height: 1.6; }
+.card-body { padding: 1rem 1.6rem; flex: 1; }
+.card-features { list-style: none; display: flex; flex-direction: column; gap: .35rem; }
+.card-features li {
+  font-size: .83rem; color: #374151;
+  display: flex; gap: .5rem; align-items: flex-start;
+}
+.card-features li::before { content: "✓"; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+.card-footer {
+  padding: 1.2rem 1.6rem;
+  border-top: 1px solid var(--gris-clair);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.card-price {
+  font-family: 'Fraunces', serif;
+  font-size: 2rem; font-weight: 900; color: var(--noir);
+}
+.card-price span { font-size: .85rem; font-weight: 400; color: var(--gris); }
+.card-btn {
+  background: var(--noir); color: var(--blanc);
+  padding: .55rem 1.2rem; border-radius: 7px;
+  font-size: .82rem; font-weight: 600;
+  text-decoration: none; transition: all .2s;
+  border: none; cursor: pointer;
+}
+.card-btn:hover { background: var(--accent); }
+
+/* pack premium */
+.card-premium {
+  background: var(--noir);
+  border-color: var(--noir);
+}
+.card-premium .card-top { border-color: rgba(255,255,255,.1); }
+.card-premium .card-top h3 { color: var(--blanc); }
+.card-premium .card-top p { color: rgba(250,250,248,.55); }
+.card-premium .card-body { }
+.card-premium .card-features li { color: rgba(250,250,248,.8); }
+.card-premium .card-features li::before { color: var(--accent); }
+.card-premium .card-footer { border-color: rgba(255,255,255,.1); }
+.card-premium .card-price { color: var(--blanc); }
+.card-premium .card-price span { color: rgba(250,250,248,.4); }
+.card-premium .card-btn { background: var(--accent); }
+.card-premium .card-btn:hover { background: #B8662A; }
+.economy-badge {
+  font-size: .72rem; color: var(--accent);
+  font-weight: 600; margin-top: .2rem;
+}
+
+/* ── POUR QUI ─────────────────────────────────── */
+.pour-qui { background: var(--blanc); }
+.pour-qui-grid {
+  max-width: 860px; margin: 2.5rem auto 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.qui-card {
+  border: 1px solid var(--gris-clair);
+  border-radius: 12px; padding: 1.3rem;
+  text-align: center;
+  transition: border-color .2s, background .2s;
+}
+.qui-card:hover { border-color: var(--accent); background: var(--accent-light); }
+.qui-card .icon { font-size: 2rem; margin-bottom: .5rem; }
+.qui-card h3 { font-size: .9rem; font-weight: 600; color: var(--noir); margin-bottom: .2rem; }
+.qui-card p { font-size: .8rem; color: var(--gris); }
+
+/* ── RÉSULTATS ─────────────────────────────────── */
+.resultats { background: var(--noir); color: var(--blanc); }
+.resultats .section-title { color: var(--blanc); }
+.resultats .section-sub { color: rgba(250,250,248,.6); }
+.resultats-grid {
+  max-width: 860px; margin: 2.5rem auto 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.resultat-card {
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 12px; padding: 1.4rem;
+  background: rgba(255,255,255,.04);
+}
+.resultat-card .big {
+  font-family: 'Fraunces', serif;
+  font-size: 2.5rem; font-weight: 900;
+  color: var(--accent); line-height: 1;
+  margin-bottom: .3rem;
+}
+.resultat-card p { font-size: .85rem; color: rgba(250,250,248,.6); line-height: 1.6; }
+
+/* ── TEMOIGNAGES ─────────────────────────────── */
+.temoignages { background: var(--creme); }
+.temoignages-grid {
+  max-width: 900px; margin: 2.5rem auto 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+.temoignage {
+  background: var(--blanc);
+  border: 1px solid var(--gris-clair);
+  border-radius: 14px; padding: 1.5rem;
+}
+.stars { color: #F59E0B; font-size: 1rem; margin-bottom: .7rem; }
+.temoignage blockquote {
+  font-size: .9rem; color: #374151;
+  line-height: 1.7; margin-bottom: 1rem;
+  font-style: italic;
+}
+.temoignage-author { display: flex; align-items: center; gap: .7rem; }
+.author-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--creme);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+  border: 1px solid var(--gris-clair);
+}
+.author-info .name { font-size: .85rem; font-weight: 600; color: var(--noir); }
+.author-info .job  { font-size: .75rem; color: var(--gris); }
+.temoignage-note { text-align: center; margin-top: 1.5rem; font-size: .82rem; color: var(--gris); }
+
+/* ── FAQ ────────────────────────────────────── */
+.faq { background: var(--blanc); }
+.faq-inner { max-width: 680px; margin: 2.5rem auto 0; }
+.faq-item {
+  border-bottom: 1px solid var(--gris-clair);
+}
+.faq-question {
+  width: 100%; background: none; border: none;
+  padding: 1.1rem 0;
+  display: flex; justify-content: space-between; align-items: center;
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+  font-size: .95rem; font-weight: 600; color: var(--noir);
+  text-align: left; gap: 1rem;
+}
+.faq-question .arrow {
+  font-size: 1rem; color: var(--gris);
+  transition: transform .25s; flex-shrink: 0;
+}
+.faq-item.open .arrow { transform: rotate(45deg); }
+.faq-answer {
+  max-height: 0; overflow: hidden;
+  transition: max-height .3s ease, padding .3s;
+}
+.faq-item.open .faq-answer { max-height: 200px; padding-bottom: 1rem; }
+.faq-answer p { font-size: .9rem; color: var(--gris); line-height: 1.7; }
+
+/* ── CTA FINAL ──────────────────────────────── */
+.cta-final {
+  background: var(--accent);
+  padding: 5rem 2.5rem;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.cta-final::before {
+  content: '';
+  position: absolute; inset: -50%;
+  width: 200%; height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.cta-final h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900; color: var(--blanc);
+  line-height: 1.1; margin-bottom: .8rem;
+  position: relative;
+}
+.cta-final p {
+  color: rgba(255,255,255,.8); font-size: 1.05rem;
+  margin-bottom: 2rem; max-width: 44ch; margin-left: auto; margin-right: auto;
+  position: relative;
+}
+.btn-blanc {
+  background: var(--blanc); color: var(--accent);
+  padding: 1rem 2.5rem; border-radius: 8px;
+  font-weight: 700; font-size: 1.05rem;
+  text-decoration: none; display: inline-block;
+  transition: all .2s; position: relative;
+  box-shadow: 0 4px 20px rgba(0,0,0,.15);
+}
+.btn-blanc:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,.2); }
+.cta-reassure {
+  margin-top: 1.2rem; font-size: .8rem;
+  color: rgba(255,255,255,.7); position: relative;
+}
+
+/* ── FOOTER ─────────────────────────────────── */
+footer {
+  background: var(--noir); color: rgba(250,250,248,.4);
+  padding: 2rem 2.5rem; text-align: center;
+  font-size: .8rem;
+}
+footer a { color: rgba(250,250,248,.4); text-decoration: none; }
+footer a:hover { color: var(--blanc); }
+
+/* ── STICKY BOTTOM BAR (mobile) ─────────────── */
+.sticky-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--noir);
+  padding: .9rem 1.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  z-index: 99; gap: 1rem;
+  border-top: 1px solid rgba(255,255,255,.08);
+  display: none;
+}
+@media(max-width: 640px) { .sticky-bar { display: flex; } }
+.sticky-bar p { font-size: .8rem; color: rgba(250,250,248,.6); }
+.sticky-bar strong { color: var(--blanc); display: block; font-size: .9rem; }
+.sticky-bar a {
+  background: var(--accent); color: var(--blanc);
+  padding: .6rem 1.3rem; border-radius: 7px;
+  font-weight: 700; font-size: .85rem;
+  text-decoration: none; white-space: nowrap;
+  flex-shrink: 0;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Enzoptimize<span>.</span></div>
+  <a href="#formations" class="nav-cta">Voir les formations →</a>
+</nav>
+
+<!-- ══ HERO ══════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge fade-up">🎯 Enzoptimize · Formations digitales</div>
+    <h1 class="fade-up delay-1">
+      Devenez <em>visible</em><br>sur internet.<br>Sans agence.
+    </h1>
+    <p class="hero-sub fade-up delay-2">
+      Enzoptimize vous apprend le SEO, les réseaux sociaux et l'IA — avec des méthodes concrètes, issues du terrain, applicables dès aujourd'hui.
+    </p>
+    <div class="hero-ctas fade-up delay-3">
+      <a href="#formations" class="btn-primary">Découvrir les formations</a>
+      <a href="#about" class="btn-ghost">Notre approche</a>
+    </div>
+    <div class="hero-stats fade-up delay-4">
+      <div class="hero-stat"><div class="num">3</div><div class="lbl">formations complètes</div></div>
+      <div class="hero-stat"><div class="num">15h</div><div class="lbl">de contenu total</div></div>
+      <div class="hero-stat"><div class="num">97€</div><div class="lbl">le pack complet</div></div>
+    </div>
+  </div>
+  <div class="scroll-hint">DÉFILER</div>
+</section>
+
+<!-- ══ PROBLÈME ═════════════════════════════ -->
+<section class="probleme">
+  <div style="max-width:900px;margin:0 auto;">
+    <div class="section-tag center">Le problème</div>
+    <h2 class="section-title center">Vous avez un super produit.<br>Personne ne le voit.</h2>
+    <p class="section-sub center" style="margin:0 auto 0;">Et ce n'est pas de votre faute. Personne ne vous a appris comment fonctionne internet.</p>
+    <div class="probleme-grid">
+      <div class="prob-card">
+        <div class="icon">😤</div>
+        <h3>Invisible sur Google</h3>
+        <p>Vous avez un site, mais il n'apparaît jamais quand vos clients cherchent vos services.</p>
+      </div>
+      <div class="prob-card">
+        <div class="icon">📱</div>
+        <h3>Réseaux sans résultats</h3>
+        <p>Vous publiez, mais personne ne réagit. Aucune vente, aucun contact, juste du temps perdu.</p>
+      </div>
+      <div class="prob-card">
+        <div class="icon">🤖</div>
+        <h3>L'IA vous dépasse</h3>
+        <p>Tout le monde parle de ChatGPT et Claude, mais vous ne savez pas comment les utiliser concrètement.</p>
+      </div>
+      <div class="prob-card">
+        <div class="icon">💸</div>
+        <h3>Les agences coûtent cher</h3>
+        <p>Déléguer à une agence coûte des milliers d'euros par mois. Pas accessible quand on débute.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ABOUT ════════════════════════════════ -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-avatar">⚡</div>
+    <div class="about-text">
+      <div class="section-tag">Notre approche</div>
+      <h2 class="section-title">Pourquoi Enzoptimize ?</h2>
+      <p>Enzoptimize est un organisme de formation spécialisé en marketing digital. Nos méthodes sont issues du terrain — conçues par des praticiens, testées sur de vrais business, pas dans des salles de cours.</p>
+      <p>Notre conviction : vous n'avez pas besoin d'une agence à 2 000 €/mois pour être visible en ligne. Vous avez besoin des bonnes méthodes, des bons outils, et d'un plan d'action clair. C'est exactement ce qu'on vous donne.</p>
+      <div class="about-tags">
+        <span class="about-tag">📈 SEO & Référencement</span>
+        <span class="about-tag">📱 Réseaux Sociaux</span>
+        <span class="about-tag">🤖 Intelligence Artificielle</span>
+        <span class="about-tag">✅ Méthodes terrain</span>
+        <span class="about-tag">🎯 Résultats mesurables</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FORMATIONS ════════════════════════════ -->
+<section class="formations" id="formations">
+  <div class="section-tag center">Les formations</div>
+  <h2 class="section-title center">Choisissez votre formation</h2>
+  <p class="section-sub center">Commencez par une formation seule, ou prenez le pack complet et économisez 24 €.</p>
+  <div class="formations-grid">
+
+    <!-- SEO -->
+    <div class="formation-card">
+      <div class="card-top">
+        <div class="card-emoji">🔍</div>
+        <div class="card-badge badge-vert">Formation 1</div>
+        <h3>SEO Débutant</h3>
+        <p>Apparaissez en premier sur Google sans être développeur.</p>
+      </div>
+      <div class="card-body">
+        <ul class="card-features">
+          <li>5 modules · 18 leçons · 4h de contenu</li>
+          <li>Recherche de mots-clés avec outils gratuits</li>
+          <li>Optimisation de vos pages (Title, H1, images…)</li>
+          <li>Créer du contenu qui se positionne</li>
+          <li>Google Search Console expliqué simplement</li>
+          <li>Plan d'action 30 jours inclus</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <div>
+          <div class="card-price">27€ <span>accès à vie</span></div>
+        </div>
+        <a href="#" class="card-btn">Je commence →</a>
+      </div>
+    </div>
+
+    <!-- RÉSEAUX -->
+    <div class="formation-card">
+      <div class="card-top">
+        <div class="card-emoji">📱</div>
+        <div class="card-badge badge-bleu">Formation 2</div>
+        <h3>Réseaux Sociaux Pro</h3>
+        <p>Créez du contenu qui engage et convertit sur Instagram, LinkedIn et TikTok.</p>
+      </div>
+      <div class="card-body">
+        <ul class="card-features">
+          <li>5 modules · 20 leçons · 5h de contenu</li>
+          <li>Stratégie de contenu et ligne éditoriale</li>
+          <li>Visuels pro avec Canva (même sans talent)</li>
+          <li>Algorithmes Instagram, LinkedIn et TikTok</li>
+          <li>Reels et vidéos courtes avec son smartphone</li>
+          <li>Automatisation : gérer ses réseaux en 3h/semaine</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <div>
+          <div class="card-price">37€ <span>accès à vie</span></div>
+        </div>
+        <a href="#" class="card-btn">Je commence →</a>
+      </div>
+    </div>
+
+    <!-- IA -->
+    <div class="formation-card">
+      <div class="card-top">
+        <div class="card-emoji">🤖</div>
+        <div class="card-badge badge-violet">Formation 3</div>
+        <h3>IA & Productivité</h3>
+        <p>Gagnez 2h par jour avec Claude et ChatGPT — sans être développeur.</p>
+      </div>
+      <div class="card-body">
+        <ul class="card-features">
+          <li>5 modules · 22 leçons · 6h de contenu</li>
+          <li>Claude vs ChatGPT : lequel utiliser et quand</li>
+          <li>La méthode RCTF pour des prompts parfaits</li>
+          <li>Créer un mois de contenu en une demi-journée</li>
+          <li>Automatiser son service client et ses devis</li>
+          <li>10 prompts prêts à l'emploi inclus</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <div>
+          <div class="card-price">57€ <span>accès à vie</span></div>
+        </div>
+        <a href="#" class="card-btn">Je commence →</a>
+      </div>
+    </div>
+
+    <!-- PACK -->
+    <div class="formation-card card-premium" style="grid-column: 1 / -1; max-width: 500px; margin: 0 auto; width: 100%;">
+      <div class="card-top">
+        <div class="card-emoji">🚀</div>
+        <div class="card-badge badge-noir" style="background:var(--accent);color:#fff;">⭐ Meilleure offre</div>
+        <h3>Pack Visibilité Totale</h3>
+        <p style="color:rgba(250,250,248,.55);">Les 3 formations + tous les bonus exclusifs. L'offre complète pour dominer votre marché.</p>
+      </div>
+      <div class="card-body">
+        <ul class="card-features">
+          <li>Accès aux 3 formations complètes (15h)</li>
+          <li>Bonus : Audit SEO de votre site offert</li>
+          <li>Bonus : 50 templates de prompts IA prêts</li>
+          <li>Bonus : Kit de visuels Canva inclus</li>
+          <li>Accès à vie + toutes les mises à jour</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <div>
+          <div class="card-price">97€ <span>au lieu de 121€</span></div>
+          <div class="economy-badge">✦ Vous économisez 24 €</div>
+        </div>
+        <a href="#" class="card-btn">Je prends le pack →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ POUR QUI ═══════════════════════════════ -->
+<section class="pour-qui">
+  <div class="section-tag center">Pour qui ?</div>
+  <h2 class="section-title center">Ces formations sont faites pour vous si…</h2>
+  <div class="pour-qui-grid">
+    <div class="qui-card"><div class="icon">🔨</div><h3>Artisan</h3><p>Plombier, électricien, menuisier — vous voulez que Google vous trouve en premier.</p></div>
+    <div class="qui-card"><div class="icon">🛍️</div><h3>Commerçant</h3><p>Boutique physique ou en ligne, vous voulez plus de trafic sans dépenser en pub.</p></div>
+    <div class="qui-card"><div class="icon">💼</div><h3>Freelance</h3><p>Consultant, designer, coach — vous voulez des clients qui viennent à vous.</p></div>
+    <div class="qui-card"><div class="icon">🌱</div><h3>Entrepreneur</h3><p>Vous lancez ou développez votre activité et voulez maîtriser votre visibilité.</p></div>
+    <div class="qui-card"><div class="icon">👩‍💼</div><h3>Salarié en reconversion</h3><p>Vous vous formez au digital pour changer de carrière ou évoluer.</p></div>
+  </div>
+</section>
+
+<!-- ══ RÉSULTATS ══════════════════════════════ -->
+<section class="resultats">
+  <div style="max-width:860px;margin:0 auto;text-align:center;">
+    <div class="section-tag" style="color:var(--accent);">Ce que vous allez obtenir</div>
+    <h2 class="section-title">Des résultats concrets,<br>pas de la théorie.</h2>
+    <p class="section-sub" style="margin:0 auto;">Chaque formation se termine par un plan d'action 30 jours. Pas de blabla — que des choses applicables immédiatement.</p>
+    <div class="resultats-grid" style="margin-top:2.5rem;">
+      <div class="resultat-card">
+        <div class="big">+3h</div>
+        <p>gagnées par semaine en moyenne grâce à l'automatisation IA</p>
+      </div>
+      <div class="resultat-card">
+        <div class="big">×3</div>
+        <p>de trafic organique en 3 à 6 mois avec les techniques SEO enseignées</p>
+      </div>
+      <div class="resultat-card">
+        <div class="big">30j</div>
+        <p>pour voir les premiers résultats en suivant le plan d'action inclus</p>
+      </div>
+      <div class="resultat-card">
+        <div class="big">0€</div>
+        <p>de budget pub nécessaire — 100% de stratégies organiques gratuites</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TÉMOIGNAGES ════════════════════════════ -->
+<section class="temoignages">
+  <div class="section-tag center">Témoignages</div>
+  <h2 class="section-title center">Ils ont franchi le pas.</h2>
+  <p class="section-sub center">Ce que disent ceux qui ont suivi les formations.</p>
+  <div class="temoignages-grid">
+    <div class="temoignage">
+      <div class="stars">★★★★★</div>
+      <blockquote>"J'avais essayé de comprendre le SEO seul pendant des mois. En 4h de formation, j'ai compris ce que personne ne m'avait expliqué clairement. Mon site est passé de la page 5 à la page 1 en 6 semaines."</blockquote>
+      <div class="temoignage-author">
+        <div class="author-avatar">👨‍🔧</div>
+        <div class="author-info">
+          <div class="name">Thomas R.</div>
+          <div class="job">Plombier indépendant, Lyon</div>
+        </div>
+      </div>
+    </div>
+    <div class="temoignage">
+      <div class="stars">★★★★★</div>
+      <blockquote>"La formation réseaux sociaux m'a aidée à passer de 200 à 1 400 abonnés Instagram en 2 mois. Et surtout, j'ai eu mes 3 premiers clients via Instagram — chose que je n'aurais jamais crue possible avant."</blockquote>
+      <div class="temoignage-author">
+        <div class="author-avatar">👩‍💼</div>
+        <div class="author-info">
+          <div class="name">Camille M.</div>
+          <div class="job">Coach bien-être, freelance</div>
+        </div>
+      </div>
+    </div>
+    <div class="temoignage">
+      <div class="stars">★★★★★</div>
+      <blockquote>"Le module IA m'a littéralement transformé. Je crée maintenant mes newsletters, mes posts et mes propositions commerciales 10 fois plus vite. J'ai récupéré presque 2h par jour."</blockquote>
+      <div class="temoignage-author">
+        <div class="author-avatar">👨‍💻</div>
+        <div class="author-info">
+          <div class="name">Kevin L.</div>
+          <div class="job">Consultant marketing, Paris</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="temoignage-note">⚠️ Ces témoignages sont des exemples illustratifs. Vos résultats dépendront de votre implication et de votre secteur.</p>
+</section>
+
+<!-- ══ FAQ ════════════════════════════════════ -->
+<section class="faq">
+  <div class="section-tag center">FAQ</div>
+  <h2 class="section-title center">Questions fréquentes</h2>
+  <div class="faq-inner">
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Faut-il des connaissances techniques pour suivre les formations ?
+        <span class="arrow">+</span>
+      </button>
+      <div class="faq-answer"><p>Pas du tout. Les formations sont conçues pour des débutants complets. Si vous savez utiliser un smartphone et naviguer sur internet, vous avez toutes les bases nécessaires.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Combien de temps faut-il pour voir des résultats SEO ?
+        <span class="arrow">+</span>
+      </button>
+      <div class="faq-answer"><p>Les premières améliorations techniques sont visibles immédiatement. Les résultats en termes de positionnement Google arrivent généralement entre 4 et 12 semaines selon votre niche et votre niveau de concurrence.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Les formations sont-elles accessibles à vie ?
+        <span class="arrow">+</span>
+      </button>
+      <div class="faq-answer"><p>Oui, une fois achetée, vous avez un accès illimité à la formation, y compris toutes les mises à jour futures. Le digital évolue vite, les formations aussi.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Est-ce que je peux acheter une seule formation ou faut-il tout prendre ?
+        <span class="arrow">+</span>
+      </button>
+      <div class="faq-answer"><p>Vous pouvez tout à fait acheter une seule formation selon votre besoin prioritaire. Le pack complet est simplement plus avantageux si vous savez que vous voudrez les 3.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Y a-t-il un remboursement si la formation ne me convient pas ?
+        <span class="arrow">+</span>
+      </button>
+      <div class="faq-answer"><p>Oui. Si dans les 7 jours suivant votre achat vous estimez que la formation ne correspond pas à vos attentes, contactez-moi et je vous rembourse intégralement, sans question.</p></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ CTA FINAL ══════════════════════════════ -->
+<section class="cta-final" id="cta">
+  <h2>Prêt à passer à l'action,<br><em style="font-style:italic;font-weight:300;">enfin ?</em></h2>
+  <p>Commencez par la formation qui répond à votre besoin le plus urgent. Ou prenez le pack et transformez complètement votre présence en ligne.</p>
+  <a href="#formations" class="btn-blanc">Voir toutes les formations →</a>
+  <p class="cta-reassure">✓ Accès immédiat &nbsp;·&nbsp; ✓ Satisfait ou remboursé 7 jours &nbsp;·&nbsp; ✓ Accès à vie</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Enzoptimize &nbsp;·&nbsp; <a href="#">Mentions légales</a> &nbsp;·&nbsp; <a href="#">CGV</a> &nbsp;·&nbsp; <a href="#">Contact</a></p>
+</footer>
+
+<!-- STICKY BAR MOBILE -->
+<div class="sticky-bar">
+  <div>
+    <strong>Pack Visibilité Totale</strong>
+    <p>Enzoptimize · 3 formations · 15h</p>
+  </div>
+  <a href="#formations">97€ →</a>
+</div>
+
+<script>
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Intersection observer for scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.prob-card, .formation-card, .qui-card, .resultat-card, .temoignage').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
